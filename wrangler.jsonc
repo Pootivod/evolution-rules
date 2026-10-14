@@ -6,5 +6,7 @@
   "assets": {
     "directory": "./public",
     "not_found_handling": "404-page"
-  }
+  },
+  // Нужен для сборок предпросмотра веток (npx wrangler preview)
+  "previews": {}
 }
