@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1510">
+<meta name="description" content="Правила настольной игры «Эволюция»: подготовка, фазы развития и выживания, действия, хищники, таблица свойств и подсчёт очков.">
+<title>Эволюция — правила игры</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Unbounded:wght@500;700;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0B1510}
+[hidden]{display:none!important}
+a{color:#C6F432;text-decoration:none}a:hover{color:#E4FF8A}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px;box-sizing:border-box}
+.sec{scroll-margin-top:76px}
+.lbl{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#9DB0A3}
+.h2{font-family:'Unbounded','Arial Black',sans-serif;font-weight:700;font-size:30px;line-height:1.08;letter-spacing:-.01em;margin:0;color:#E9EFE6;text-wrap:balance}
+.h3{font-family:'Unbounded','Arial Black',sans-serif;font-weight:500;font-size:18px;line-height:1.25;margin:0;color:#E9EFE6}
+.p{margin:0;font-size:16px;line-height:1.55;color:#C9D6CC;text-wrap:pretty}
+.p b{color:#E9EFE6}
+.sm{font-size:15px}
+.muted{color:#9DB0A3}
+.card{background:#122019;border:1px solid rgba(233,239,230,.10);border-radius:22px;box-sizing:border-box}
+.inset{background:#0E1B14;border:1px solid rgba(233,239,230,.08);border-radius:18px;box-sizing:border-box}
+.callout{background:rgba(198,244,50,.08);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.chip{display:inline-block;width:14px;height:14px;border-radius:50%;flex:none;box-shadow:inset 0 -2px 0 rgba(0,0,0,.28);box-sizing:border-box}
+.chip-lg{width:26px;height:26px}
+.chip-xl{width:40px;height:40px}
+.chip-r{background:#E5484D}.chip-b{background:#3E8EF7}.chip-y{background:#F5C518}
+.chip-gone{background:transparent;border:2px dashed #E5484D;box-shadow:none}
+.ph{background:repeating-linear-gradient(135deg,rgba(198,244,50,.07) 0 10px,transparent 10px 22px);border:1px dashed rgba(198,244,50,.4);border-radius:22px;display:flex;align-items:flex-end;padding:16px;box-sizing:border-box;width:100%}
+.btn{font-family:'Golos Text',sans-serif;font-weight:600;font-size:15px;min-height:44px;min-width:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(233,239,230,.2);background:transparent;color:#E9EFE6;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.btn.on{background:#C6F432;color:#0B1510;border-color:#C6F432}
+.btn-main{width:100%;min-height:52px;background:#C6F432;color:#0B1510;border-color:#C6F432;font-size:16px}
+.btn-sq{padding:0;border-radius:12px}
+.navchip{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:#122019;border:1px solid rgba(233,239,230,.12);color:#E9EFE6;font-size:14px;font-weight:500;white-space:nowrap}
+.navrow{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 20px 12px}
+.navrow::-webkit-scrollbar{display:none}
+.li{display:flex;gap:12px;align-items:flex-start}
+.li-dot{width:7px;height:7px;border-radius:2px;background:#C6F432;margin-top:9px;flex:none}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:12px;border:1.5px solid rgba(233,239,230,.3);background:transparent;color:#E9EFE6;font-family:'Golos Text',sans-serif;font-weight:600;font-size:13.5px;line-height:1.2;box-sizing:border-box}
+.tag-main{border-color:#4ADE80}
+.tag-extra{border-color:#FB923C}
+.tag-auto{border-color:#A78BFA}
+.tag-pass{border-color:#94A3B8}
+.bd{width:9px;height:9px;background:#A78BFA;transform:rotate(45deg);flex:none;margin:0 2px}
+.bs{width:10px;height:10px;border:2px solid #94A3B8;border-radius:2px;box-sizing:border-box;flex:none}
+.tag-off{border-style:dashed;color:#9DB0A3}
+.bm{width:11px;height:11px;border-radius:50%;background:#4ADE80;flex:none;box-shadow:0 0 0 3px rgba(74,222,128,.18)}
+.bx{width:12px;height:11px;background:#FB923C;clip-path:polygon(50% 0,100% 100%,0 100%);flex:none}
+.bnone{display:none}
+.act{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:9px;letter-spacing:.06em;padding:2px 5px;border-radius:5px;line-height:1.2}
+.act-auto{background:rgba(233,239,230,.16);color:#E9EFE6}
+.act-pass{border:1px dashed rgba(233,239,230,.4);color:#9DB0A3}
+.loop{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:8px;background:rgba(198,244,50,.12);color:#C6F432;font:700 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;white-space:nowrap;vertical-align:1px}
+.tile{font-family:'Golos Text',sans-serif;cursor:pointer;background:#122019;border:1px solid rgba(233,239,230,.10);border-radius:16px;padding:10px 10px 12px;display:flex;flex-direction:column;gap:2px;text-align:left;color:#E9EFE6;min-height:108px;width:100%;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.tile.on{border-color:#C6F432;box-shadow:0 0 0 1px #C6F432 inset;background:#17291F}
+.tile-top{display:flex;justify-content:space-between;align-items:center;min-height:16px;gap:4px}
+.tile-tr{display:flex;align-items:center;gap:6px}
+.tile-cost{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;color:#FF8A8D}
+.dot{width:9px;height:9px;border-radius:50%}
+.ichip{display:inline-block;width:.85em;height:.85em;border-radius:50%;vertical-align:-.1em;margin:0 .08em;box-shadow:inset 0 -1.5px 0 rgba(0,0,0,.28)}
+.itag{display:inline-flex;align-items:center;gap:5px;padding:0 7px;margin:0 1px;border-radius:8px;border:1.5px solid rgba(233,239,230,.3);font-weight:600;font-size:.92em;line-height:1.45;white-space:nowrap;color:#E9EFE6}
+.itag-main{border-color:#4ADE80}
+.itag-extra{border-color:#FB923C}
+.itag .bm{width:8px;height:8px;box-shadow:none}
+.itag .bx{width:9px;height:8px}
+.tile-img{display:block;aspect-ratio:1 / 1;margin-top:6px;padding:6px;border-radius:10px;background:#EEF3E8;box-sizing:border-box;overflow:hidden}
+.tile.on .tile-img{box-shadow:0 0 0 2px #C6F432}
+.tile-name{font-weight:600;font-size:13px;line-height:1.2;margin-top:6px;hyphens:auto}
+.en{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#9DB0A3}
+.dl{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid rgba(233,239,230,.08)}
+.dl:last-child{border-bottom:0}
+.dl-k{font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#9DB0A3;padding-top:3px}
+.dl-v{font-size:14.5px;line-height:1.45;color:#E9EFE6}
+.lim{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:6px;align-items:center;font-size:13px}
+.tk{height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:700 11px 'JetBrains Mono',monospace}
+.tk-on{background:#C6F432;color:#0B1510}
+.tk-off{border:1px dashed rgba(233,239,230,.25);color:#9DB0A3}
+.g-def .dot,.g-def .gbar{background:#7DD3FC}.g-def .tile-sym,.g-def .gtxt{color:#7DD3FC}
+.g-feed .dot,.g-feed .gbar{background:#FDBA74}.g-feed .tile-sym,.g-feed .gtxt{color:#FDBA74}
+.g-pair .dot,.g-pair .gbar{background:#C4B5FD}.g-pair .tile-sym,.g-pair .gtxt{color:#C4B5FD}
+.g-rival .dot,.g-rival .gbar{background:#F9A8D4}.g-rival .tile-sym,.g-rival .gtxt{color:#F9A8D4}
+.detail{grid-column:1 / -1;position:relative;overflow:hidden;background:#17291F;border:1px solid rgba(198,244,50,.45);border-radius:20px;padding:20px 18px 18px;display:flex;flex-direction:column;gap:14px;animation:open .25s ease-out both}
+@keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.die{width:48px;height:48px;border-radius:12px;background:#E9EFE6;color:#0B1510;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15);flex:none}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid rgba(233,239,230,.16);font-size:13px;line-height:1.3;color:#C9D6CC}
+.step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:16px 0;border-top:1px solid rgba(233,239,230,.08)}
+.step-n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#C6F432;line-height:28px}
+.step-b{display:flex;flex-direction:column;gap:12px}
+.mini-card{width:52px;height:70px;border-radius:8px;border:2px solid #C6F432;background:#16291F;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:10px;color:#C6F432;box-sizing:border-box;text-align:center}
+.mini-trait{width:52px;height:18px;border-radius:5px 5px 0 0;border:1px solid rgba(233,239,230,.25);border-bottom:0;background:#1D3327;font-size:8px;font-family:'JetBrains Mono',monospace;color:#C9D6CC;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+.num{font-family:'Unbounded',sans-serif;font-weight:900;color:#C6F432;line-height:1}
+.srow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(233,239,230,.08)}
+.stepper{display:flex;align-items:center;gap:6px;grid-row:span 2}
+.stepper-v{font-family:'Unbounded',sans-serif;font-weight:700;font-size:20px;min-width:30px;text-align:center;color:#E9EFE6}
+.ep-phase{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0E1B14;border:1px solid rgba(233,239,230,.08)}
+.ep-row{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;font-size:15px;line-height:1.4;color:#C9D6CC}
+.ep-n{width:24px;height:24px;border-radius:7px;background:rgba(198,244,50,.14);color:#C6F432;display:flex;align-items:center;justify-content:center;font:700 12px 'JetBrains Mono',monospace}
+.ep-arrow{display:flex;justify-content:center;color:#C6F432}
+.strip{display:flex;flex-wrap:wrap;gap:6px}
+.board{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:#0E1B14;border:1px solid rgba(233,239,230,.08)}
+.brow{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px;align-items:center}
+.btoks{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cr{min-width:44px;height:30px;padding:0 8px;border-radius:8px;border:1.5px solid rgba(233,239,230,.4);display:inline-flex;align-items:center;justify-content:center;font:700 11px 'Unbounded',sans-serif;color:#E9EFE6;box-sizing:border-box}
+.cr-hunt{border-color:#FDBA74;color:#FDBA74;background:rgba(253,186,116,.08)}
+.cr-target{border-color:#C6F432;color:#0B1510;background:#C6F432}
+.cr-safe{opacity:.45;border-style:dashed}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:rgba(198,244,50,.08);font-size:14.5px;line-height:1.45;color:#E9EFE6}
+.chap{display:flex;align-items:center;gap:12px}
+.chap-n{width:44px;height:44px;border-radius:14px;background:#C6F432;color:#0B1510;display:flex;align-items:center;justify-content:center;font:900 18px 'Unbounded',sans-serif;flex:none}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.rise2{animation:rise .8s .12s cubic-bezier(.2,.7,.2,1) both}
+</style>
+</head>
+<body>
+<div style="background: #0B1510; color: #E9EFE6; font-family: 'Golos Text', 'Segoe UI', sans-serif; min-height: 400px">
+
+<header style="position: sticky; top: 0; z-index: 10; background: rgba(11,21,16,0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233,239,230,0.08)">
+<div style="max-width: 560px; margin: 0 auto">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px 10px">
+<a href="#top" style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 17px; letter-spacing: 0.02em; color: #C6F432">ЭВОЛЮЦИЯ</a>
+<span class="lbl">правила</span>
+</div>
+<nav class="navrow" aria-label="Разделы">
+<a class="navchip" href="#setup">Подготовка</a>
+<a class="navchip" href="#epoch">Эпоха</a>
+<a class="navchip" href="#dev">Развитие</a>
+<a class="navchip" href="#surv">Выживание</a>
+<a class="navchip" href="#actions">Действия</a>
+<a class="navchip" href="#predators">Хищники</a>
+<a class="navchip" href="#traits">Свойства</a>
+<a class="navchip" href="#score">Конец игры</a>
+</nav>
+</div>
+</header>
+
+<section id="top" class="wrap sec" style="padding-top: 36px; padding-bottom: 56px; display: flex; flex-direction: column; gap: 24px">
+<div class="rise" style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl">Научно-популярная настольная игра</span>
+<h1 style="margin: 0; font-family: 'Unbounded', 'Arial Black', sans-serif; font-weight: 900; font-size: clamp(36px, 10.6vw, 58px); line-height: 0.95; letter-spacing: -0.03em; color: #C6F432">ЭВОЛЮЦИЯ</h1>
+<span class="pill" style="align-self: flex-start; border-color: rgba(198,244,50,0.4); color: #C6F432">Редакция правил с корректировками</span>
+</div>
+<div class="ph rise2" style="aspect-ratio: 4 / 5"><span class="lbl" style="color: #C6F432">Изображение 01 · обложка · 4:5</span></div>
+<p class="p" style="font-size: 18px; line-height: 1.5; color: #E9EFE6">Комбинируйте свойства существ, пока количество еды постоянно меняется. Регулируйте численность, получайте полезные свойства, мешайте соперникам — и к концу игры займите доминирующее положение на столе.</p>
+<div class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span class="lbl" style="color: #C6F432">Условие победы</span>
+<p class="p sm">Побеждает тот, у кого в конце игры больше всех очков. Очки дают выжившие существа и их свойства.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="num" style="font-size: 34px">2</span><span class="muted" style="font-size: 13px; line-height: 1.3">фазы в каждой эпохе</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="num" style="font-size: 34px">2–4</span><span class="muted" style="font-size: 13px; line-height: 1.3">игрока, до 8 с двумя наборами</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="display: flex; gap: 4px; height: 34px; align-items: center"><span class="chip chip-lg chip-r"></span><span class="chip chip-lg chip-b"></span><span class="chip chip-lg chip-y"></span></span><span class="muted" style="font-size: 13px; line-height: 1.3">три вида фишек еды</span></div>
+</div>
+</section>
+
+<section id="setup" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Раздел 1</span><h2 class="h2">Подготовка к игре</h2></div>
+<div class="card" style="padding: 4px 18px">
+<div class="step" style="border-top: 0"><span class="step-n">01</span><p class="p sm">Тщательно перемешайте колоду и раздайте каждому по <b>6 карт</b> с верха — это рука игрока.</p></div>
+<div class="step"><span class="step-n">02</span><p class="p sm">Колоду положите в центр стола <b>рубашкой вверх</b> — стороной с изображением существа.</p></div>
+<div class="step"><span class="step-n">03</span><p class="p sm">Рядом разложите фишки еды: красные, синие и жёлтые.</p></div>
+<div class="step"><span class="step-n">04</span><p class="p sm">Жребием определите <b>первого игрока</b>. Дальше игра идёт эпохами.</p></div>
+</div>
+<p class="p muted" style="font-size: 14px">Не хватает фишек какого-то цвета — замените их фишками другого цвета или самодельными маркерами.</p>
+</section>
+
+<section id="epoch" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Раздел 2</span><h2 class="h2">Эпоха — один круг игры</h2></div>
+<p class="p sm">Игра состоит из эпох. В каждой эпохе две фазы: сначала <b>развитие</b>, потом <b>выживание</b>. Вымирание — не отдельная фаза, а проверка в самом конце выживания.</p>
+
+<div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="h3">Эпоха</span><span class="lbl">повторяется</span></div>
+<div class="ep-phase">
+<span class="lbl" style="color: #C6F432">Фаза 1 · Развитие</span>
+<div class="ep-row"><span class="ep-n">1</span><span>Игроки получают новые карты (кроме первой эпохи). Колода опустела после раздачи — эпоха последняя</span></div>
+<div class="ep-row"><span class="ep-n">2</span><span>По очереди выкладывают по одной карте <span class="loop"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"></path><path d="M21 3v5h-5"></path></svg>ЦИКЛ</span></span></div>
+<div class="ep-row"><span class="ep-n">3</span><span>Все спасовали — переходим к выживанию</span></div>
+</div>
+<div class="ep-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"></path></svg></div>
+<div class="ep-phase">
+<span class="lbl" style="color: #C6F432">Фаза 2 · Выживание</span>
+<div class="ep-row"><span class="ep-n">1</span><span>Первый игрок бросает кубики — кормовая база</span></div>
+<div class="ep-row"><span class="ep-n">2</span><span>По очереди ходы: основное действие + дополнительные <span class="loop"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"></path><path d="M21 3v5h-5"></path></svg>ЦИКЛ</span></span></div>
+<div class="ep-row"><span class="ep-n">3</span><span>Конец фазы: жир, проверка вымирания, фишки снимаются</span></div>
+</div>
+<div class="ep-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"></path></svg></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div class="inset" style="padding: 14px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 600; font-size: 14px">Эпоха не последняя</span><span class="muted" style="font-size: 13px; line-height: 1.4">Следующая эпоха — снова с развития</span></div>
+<div class="inset" style="padding: 14px; display: flex; flex-direction: column; gap: 6px; border-color: rgba(198,244,50,0.35)"><span style="font-weight: 600; font-size: 14px">Эпоха последняя</span><span class="muted" style="font-size: 13px; line-height: 1.4">Конец игры → подсчёт очков</span></div>
+</div>
+<p class="muted" style="margin: 4px 0 0; font-size: 13px; line-height: 1.45"><span class="loop">ЦИКЛ</span> — шаг повторяется: игроки ходят по кругу, пока не выполнится условие окончания фазы.</p>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="h3">Эпоха, фаза, ход</span>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Эпоха</b> — полный цикл игры: фаза развития и фаза выживания. Потом начинается следующая эпоха, если игра не закончилась.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Фаза</b> — одна из двух частей эпохи. У каждой фазы свои правила, действия и условие окончания.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Ход</b> — одна ваша очередь действовать. За одну фазу очередь доходит до вас несколько раз — это несколько ходов.</p></div>
+<div class="inset" style="padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<span class="lbl">Пример: одна фаза выживания</span>
+<div class="lim">
+<span></span><span class="lbl" style="text-align: center">Ход 1</span><span class="lbl" style="text-align: center">Ход 2</span><span class="lbl" style="text-align: center">Ход 3</span>
+<span style="line-height: 1.25"><b>«Топотун»</b><br><span class="muted">раз за ход</span></span><span class="tk tk-on">да</span><span class="tk tk-on">да</span><span class="tk tk-on">да</span>
+<span style="line-height: 1.25"><b>«Хищник»</b><br><span class="muted">раз за фазу</span></span><span class="tk tk-on">атака</span><span class="tk tk-off">—</span><span class="tk tk-off">—</span>
+</div>
+</div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Раз за ход</b> — в каждый ваш новый ход возможность появляется снова. Так работает «Топотун».</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Раз за фазу</b> — один раз на всю фазу. Очередь вернулась к вам — новой попытки нет; она появится только в следующей фазе. Так работают «Хищник», «Пиратство» и «Отбрасывание хвоста».</p></div>
+</div>
+</section>
+
+<section id="dev" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl">Раздел 3</span>
+<div class="chap"><span class="chap-n">1</span><h2 class="h2">Фаза развития</h2></div>
+<p class="p sm" style="margin-bottom: 6px">Карты, существа, свойства. Фаза идёт по шагам по порядку.</p>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl" style="color: #C6F432">Шаг 1</span>
+<h3 class="h3" style="font-size: 20px">Новые карты</h3>
+<p class="p sm">Каждый игрок получает столько карт, <b>сколько у него существ на столе, и ещё одну</b>.</p>
+<div class="inset" style="padding: 6px 16px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">Нет ни существ, ни карт в руке</span><b style="white-space: nowrap">6 карт</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">Нет существ, но есть карты в руке</span><b style="white-space: nowrap">1 карта</b></div>
+<div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">1 существо</span><b>2 карты</b></div>
+<div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">3 существа</span><b>4 карты</b></div>
+<div style="display: flex; justify-content: space-between; padding: 10px 0; font-size: 15px"><span class="muted">5 существ</span><b>6 карт</b></div>
+</div>
+<p class="p sm">Карты раздают с верха колоды по одной, по кругу: первому игроку, следующему по часовой стрелке и так далее — пока каждый не получит свои.</p>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>В первой эпохе карты не раздаются</b> — у всех уже есть по 6 карт с подготовки.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Колода опустела после раздачи — эта эпоха последняя.</b> Если карт не хватило на всех, кто-то получает меньше.</p></div>
+</div>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><span class="lbl" style="color: #C6F432">Шаг 2</span><span class="loop"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"></path><path d="M21 3v5h-5"></path></svg>ЦИКЛ</span></div>
+<h3 class="h3" style="font-size: 20px">Выкладываем карты</h3>
+<div class="callout"><p class="p sm" style="color: #E9EFE6">Игроки ходят по очереди, начиная с первого. В свой ход можно выложить <b>одну карту</b> одним из двух способов.</p></div>
+<div class="ph" style="aspect-ratio: 16 / 9"><span class="lbl" style="color: #C6F432">Изображение 02 · развитие · 16:9</span></div>
+<div class="inset" style="padding: 16px; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; align-items: center">
+<div class="mini-card">СУЩ.</div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 600">Рубашкой вверх → новое существо</span><span class="muted" style="font-size: 14px; line-height: 1.45">Карта кладётся на стол стороной с изображением существа. У вас появилось ещё одно существо.</span></div>
+</div>
+<div class="inset" style="padding: 16px; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; align-items: center">
+<div style="display: flex; flex-direction: column; align-items: center"><div class="mini-trait" style="background: #E9EFE6; color: #0B1510">СВОЙСТВО</div><div class="mini-card">СУЩ.</div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 600">Лицевой стороной → новое свойство</span><span class="muted" style="font-size: 14px; line-height: 1.45">Карта подкладывается под одно из ваших существ так, чтобы было видно свойство. Теперь у существа есть это свойство.</span></div>
+</div>
+<div class="li"><span class="li-dot"></span><p class="p sm">На карте два свойства? Выберите одно и положите карту этой стороной вверх. Выбор окончательный — перевернуть потом нельзя.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Парное свойство (например, «Взаимодействие») кладётся между двумя вашими существами.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Свойства даются только своим существам. Исключение — «Паразит»: только на чужое.</p></div>
+</div>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl" style="color: #C6F432">Шаг 3</span>
+<h3 class="h3" style="font-size: 20px">Пас и конец развития</h3>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Не хотите больше выкладывать — скажите «пас».</b> Вы пропускаете все оставшиеся ходы этой фазы. Невыложенные карты остаются у вас в руке — их можно сыграть в следующей эпохе.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Автоматический пас.</b> Если вам больше нечего выложить, вы считаетесь спасовавшим, даже если не говорили «пас».</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Все спасовали</b> — развитие закончено, начинается выживание.</p></div>
+<div class="callout"><span class="lbl" style="color: #C6F432">Коротко</span><p class="p sm">Игроки ходят по очереди, пока хотят и могут выкладывать карты. Кто больше не хочет — пасует и пропускает все оставшиеся ходы этой фазы. Когда закончили все — начинается выживание.</p></div>
+</div>
+</section>
+
+<section id="surv" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl">Раздел 4</span>
+<div class="chap"><span class="chap-n">2</span><h2 class="h2">Фаза выживания</h2></div>
+<p class="p sm" style="margin-bottom: 6px">Еда, охота, проверка вымирания. Фаза идёт по шагам по порядку.</p>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 12px">
+<span class="lbl" style="color: #C6F432">Фишки еды</span>
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 6px 0">
+<span class="chip chip-xl chip-r"></span>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="h3" style="font-size: 16px">Красные</span><span class="p sm">«Кормовая база» — общая еда на фазу. Существа получают их действием «Взятие».</span></div>
+</div>
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 6px 0">
+<span class="chip chip-xl chip-b"></span>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="h3" style="font-size: 16px">Синие</span><span class="p sm">«Дополнительная еда» — приходит от свойств: Хищник, Сотрудничество, Падальщик и др.</span></div>
+</div>
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 6px 0">
+<span class="chip chip-xl chip-y"></span>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="h3" style="font-size: 16px">Жёлтые</span><span class="p sm">«Жировой запас» — еда, отложенная сытым существом. <b>Не снимается в конце фазы выживания.</b></span></div>
+</div>
+<p class="p muted" style="font-size: 14px">В конце фазы выживания все фишки снимаются с существ — кроме жёлтых.</p>
+</div>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 16px">
+<span class="lbl" style="color: #C6F432">Шаг 1</span>
+<h3 class="h3" style="font-size: 20px">Кормовая база</h3>
+<p class="p sm"><b>Первый игрок этой эпохи</b> бросает кубики. Сумма плюс бонус — столько красных фишек кладут стопкой в центр стола. Это общая еда на всю фазу: из неё существа всех игроков берут пищу по одной фишке.</p>
+<div class="ph" style="aspect-ratio: 16 / 9"><span class="lbl" style="color: #C6F432">Изображение 03 · кубики · 16:9</span></div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl">Сколько игроков?</span>
+<div id="players" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px"></div>
+<span id="twoSets" class="pill" style="align-self: flex-start" hidden>5–8 игроков — только с двумя смешанными наборами</span>
+</div>
+<div class="inset" style="padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span class="lbl">Формула</span>
+<span id="formula" style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; color: #C6F432"></span>
+<span class="muted" style="font-size: 14px">Возможный размер базы: <span id="range"></span> фишек</span>
+</div>
+<button type="button" class="btn btn-main" id="roll">Бросить кубики</button>
+<div id="rollResult" style="display: flex; flex-direction: column; gap: 14px" aria-live="polite" hidden></div>
+</div>
+</div>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><span class="lbl" style="color: #C6F432">Шаг 2</span><span class="loop"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"></path><path d="M21 3v5h-5"></path></svg>ЦИКЛ</span></div>
+<h3 class="h3" style="font-size: 20px">Ходы игроков</h3>
+<div class="callout"><p class="p sm" style="color: #E9EFE6">Игроки ходят по очереди, начиная с первого, и так по кругу. В свой ход: <b>одно основное действие</b> — обязательно, если оно доступно, — и <b>дополнительные</b>, если хотите.</p>
+<div class="strip" style="margin-top: 6px"><span class="tag tag-main"><span class="bm"></span>Взятие</span><span class="tag tag-main"><span class="bm"></span>Атака</span><span class="tag tag-main"><span class="bm"></span>Топление</span></div>
+<a href="#actions" style="font-weight: 600; font-size: 15px; min-height: 44px; display: flex; align-items: center">Подробнее о действиях →</a></div>
+<div class="ph" style="aspect-ratio: 16 / 9"><span class="lbl" style="color: #C6F432">Изображение 04 · выживание · 16:9</span></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Существу с одной фишкой еды достаточно — оно <b>НАКОРМЛЕНО</b>, если у него нет свойств с цифрой в левом верхнем углу: они повышают потребность в еде. Цвет фишек (красные или синие) не важен.</p></div>
+<div class="inset" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<span class="lbl">Пример из правил</span>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Существо</span><span style="display: flex; gap: 4px"><span class="chip chip-r"></span></span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>«Большое» <b style="color: #FF8A8D">+1</b></span><span style="display: flex; gap: 4px"><span class="chip chip-r"></span></span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>«Паразит» <b style="color: #FF8A8D">+2</b></span><span style="display: flex; gap: 4px"><span class="chip chip-r"></span><span class="chip chip-b"></span></span></div>
+<div style="height: 1px; background: rgba(233,239,230,0.12)"></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: baseline"><span style="font-weight: 600; font-size: 15px">Накормлено при</span><span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 20px; color: #C6F432">4 фишках</span></div>
+</div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Сытое существо может брать еду сверх нормы, только если у него есть незаполненная карта «Жирового запаса». В конце фазы эта лишняя еда сама превратится в жёлтые фишки. Все ваши существа сыты и запасы заполнены — брать еду вы больше не можете.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Кто не может сделать ни одного действия — пропускает ход.</p></div>
+</div>
+
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 16px">
+<span class="lbl" style="color: #C6F432">Шаг 3</span>
+<h3 class="h3" style="font-size: 20px">Конец выживания и проверка вымирания</h3>
+<p class="p sm">Фаза заканчивается, когда <b>не остаётся ни одного существа, которое может совершить основное или дополнительное действие</b>. Бесконечной фаза быть не может: дополнительные действия сами перестают работать — например, «Топотуну» нечего уничтожать в пустой базе.</p>
+<div class="ph" style="aspect-ratio: 16 / 9"><span class="lbl" style="color: #C6F432">Изображение 05 · вымирание · 16:9</span></div>
+<div class="inset" style="padding: 4px 16px">
+<div class="step" style="border-top: 0"><span class="step-n">1</span><p class="p sm">Действия закончены. Оставшиеся в кормовой базе красные фишки сбрасываются.</p></div>
+<div class="step"><span class="step-n">2</span><p class="p sm">Лишняя еда у сытых существ сама превращается в жёлтые фишки на картах «Жирового запаса». Это обязательно и без подтверждения.</p></div>
+<div class="step"><span class="step-n">3</span><p class="p sm">Проверяем каждое существо: накормлено или нет.</p></div>
+<div class="step"><span class="step-n">4</span><p class="p sm">Голодные существа — вместе со своими свойствами и связанными парными свойствами — уходят в сброс. Хищники, отравленные «Ядовитым», тоже погибают.</p></div>
+<div class="step"><span class="step-n">5</span><p class="p sm"><b>Все фишки снимаются с существ, кроме жёлтых.</b></p></div>
+<div class="step"><span class="step-n">6</span><p class="p sm">Выжившие существа остаются на столе. Эпоха закончена.</p></div>
+</div>
+<div class="li"><span class="li-dot"></span><p class="p sm">У каждого игрока свой сброс; карты кладутся рубашкой вверх. Смотреть можно только свой.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Если эпоха была последней — игра окончена, считаем очки. Иначе новая эпоха снова начинается с развития. Право первого хода переходит по часовой стрелке: первым становится игрок слева от прошлого первого.</p></div>
+</div>
+</section>
+
+<section id="actions" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Раздел 5</span><h2 class="h2">Основные и дополнительные действия</h2></div>
+<p class="p sm">Как в Baldur’s Gate 3 и Dungeons &amp; Dragons: в свой ход в фазе выживания у вас есть <b>одно основное действие</b> и <b>дополнительные действия</b>, если их дают свойства ваших существ.</p>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px; border-color: rgba(74,222,128,0.45)">
+<div style="display: flex; align-items: center; gap: 10px"><span class="bm" style="width: 16px; height: 16px"></span><span class="h3">Основное действие</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div class="inset" style="padding: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">Одно за ход</span><span class="muted" style="font-size: 13px">не больше</span></div>
+<div class="inset" style="padding: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px; color: #4ADE80">Обязательно</span><span class="muted" style="font-size: 13px">если доступно</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-main" style="align-self: flex-start"><span class="bm"></span>Взятие</span><p class="p sm">Взять одну красную фишку из кормовой базы и положить на своё существо.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-main" style="align-self: flex-start"><span class="bm"></span>Атака</span><p class="p sm">Напасть хищником на существо. Каждый хищник — один раз за фазу.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-main" style="align-self: flex-start"><span class="bm"></span>Топление</span><p class="p sm">Растопить жир: превратить любое число жёлтых фишек одного существа в синие.</p></div>
+</div>
+<p class="p muted" style="font-size: 14px">За ход выбирается только одно из них.</p>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px; border-color: rgba(251,146,60,0.45)">
+<div style="display: flex; align-items: center; gap: 10px"><span class="bx" style="width: 17px; height: 15px"></span><span class="h3">Дополнительное действие</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div class="inset" style="padding: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">Не тратит основное</span><span class="muted" style="font-size: 13px">идёт вместе с ним</span></div>
+<div class="inset" style="padding: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px; color: #FB923C">По желанию</span><span class="muted" style="font-size: 13px">можно не делать</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-extra" style="align-self: flex-start"><span class="bx"></span>Топотун</span><p class="p sm">Уничтожить одну красную фишку в кормовой базе. Раз за ход.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-extra" style="align-self: flex-start"><span class="bx"></span>Пиратство</span><p class="p sm">Забрать фишку у другого ненакормленного существа. Раз за фазу.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-extra" style="align-self: flex-start"><span class="bx"></span>Спячка</span><p class="p sm">Усыпить существо: оно считается сытым.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="tag tag-extra" style="align-self: flex-start"><span class="bx"></span>Отбрасывание</span><p class="p sm">Без атаки сбросить одну карту свойства, например «Паразита». Раз за фазу — общий лимит с защитой от атаки.</p></div>
+</div>
+<p class="p muted" style="font-size: 14px">Применяются только в свой ход. Разные дополнительные действия можно сочетать, и в один ход их могут применить несколько ваших существ. У каждого свойства свой лимит.</p>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 12px; border-color: rgba(167,139,250,0.45)">
+<div style="display: flex; align-items: center; gap: 10px"><span class="bd" style="width: 13px; height: 13px; margin: 0 3px"></span><span class="h3">Автоматические эффекты</span></div>
+<p class="p sm">Это не действия: игрок их не выбирает. Они срабатывают сами, когда происходит нужное событие.</p>
+<div class="strip"><span class="tag tag-auto"><span class="bd"></span>Быстрое</span><span class="tag tag-auto"><span class="bd"></span>Ядовитое</span><span class="tag tag-auto"><span class="bd"></span>Мимикрия</span><span class="tag tag-auto"><span class="bd"></span>Падальщик</span><span class="tag tag-auto"><span class="bd"></span>Взаимодействие</span><span class="tag tag-auto"><span class="bd"></span>Сотрудничество</span><span class="tag tag-auto"><span class="bd"></span>Превращение в жир</span></div>
+<div class="li"><span class="li-dot" style="background: #A78BFA"></span><p class="p sm">Бросок кубика «Быстрого», когда его атакуют.</p></div>
+<div class="li"><span class="li-dot" style="background: #A78BFA"></span><p class="p sm">Отравление хищника, съевшего «Ядовитое» существо.</p></div>
+<div class="li"><span class="li-dot" style="background: #A78BFA"></span><p class="p sm">Превращение лишней еды в жир в конце фазы выживания.</p></div>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 12px; border-color: rgba(148,163,184,0.45)">
+<div style="display: flex; align-items: center; gap: 10px"><span class="bs" style="width: 14px; height: 14px"></span><span class="h3">Постоянные свойства</span></div>
+<p class="p sm">Это тоже не действия. Они работают всё время, пока карта лежит у существа: защищают его или меняют правила атаки и питания.</p>
+<div class="strip"><span class="tag tag-pass"><span class="bs"></span>Водоплавающее</span><span class="tag tag-pass"><span class="bs"></span>Большое</span><span class="tag tag-pass"><span class="bs"></span>Камуфляж</span><span class="tag tag-pass"><span class="bs"></span>Острое зрение</span><span class="tag tag-pass"><span class="bs"></span>Норное</span><span class="tag tag-pass"><span class="bs"></span>Симбиоз</span><span class="tag tag-pass"><span class="bs"></span>Паразит</span></div>
+</div>
+
+<div class="inset" style="padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; font-size: 13.5px">
+<span style="display: flex; gap: 7px; align-items: center"><span class="bm"></span>основное</span>
+<span style="display: flex; gap: 7px; align-items: center"><span class="bx"></span>дополнительное</span>
+<span style="display: flex; gap: 7px; align-items: center"><span class="bd"></span>автоматическое</span>
+<span style="display: flex; gap: 7px; align-items: center"><span class="bs"></span>постоянное</span>
+</div>
+
+<div class="callout"><span class="lbl" style="color: #C6F432">Главное</span><p class="p sm" style="color: #E9EFE6">Основное — обязательно. Дополнительное — по желанию. Одно основное действие не мешает использовать доступные дополнительные.</p></div>
+
+<span class="lbl" style="margin-top: 8px">Примеры ходов</span>
+<div class="card" style="padding: 4px 18px">
+<div class="step" style="border-top: 0"><span class="step-n">1</span><div class="step-b"><span style="font-weight: 600">Обычный ход</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Взятие <span class="chip chip-r"></span></span></div><p class="p" style="font-size: 14.5px">Берёте одну красную фишку и кладёте на своё голодное существо.</p></div></div>
+<div class="step"><span class="step-n">2</span><div class="step-b"><span style="font-weight: 600">Атака вместо Взятия</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Атака → <span class="chip chip-b"></span><span class="chip chip-b"></span></span></div><p class="p" style="font-size: 14.5px">Атака хищника — ваше основное действие в этот ход. Взятия в этот ход нет.</p></div></div>
+<div class="step"><span class="step-n">3</span><div class="step-b"><span style="font-weight: 600">Топление</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Топление <span class="chip chip-y"></span> → <span class="chip chip-b"></span></span></div><p class="p" style="font-size: 14.5px">Еды в базе нет, но у существа есть жир. Топление превращает жёлтые фишки в синие.</p></div></div>
+<div class="step"><span class="step-n">4</span><div class="step-b"><span style="font-weight: 600">Основное + дополнительное</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Взятие <span class="chip chip-r"></span></span><span class="tag tag-extra"><span class="bx"></span>Топотун <span class="chip chip-gone"></span></span></div><p class="p" style="font-size: 14.5px">Взяли фишку и в тот же ход уничтожили ещё одну «Топотуном». Основное действие при этом не тратится.</p></div></div>
+<div class="step"><span class="step-n">5</span><div class="step-b"><span style="font-weight: 600">Несколько дополнительных</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Взятие <span class="chip chip-r"></span></span><span class="tag tag-extra"><span class="bx"></span>Топотун <span class="chip chip-gone"></span></span><span class="tag tag-extra"><span class="bx"></span>Пиратство ← <span class="chip chip-r"></span></span></div><p class="p" style="font-size: 14.5px">Взяли фишку, «Топотуном» убрали ещё одну из базы, «Пиратством» забрали фишку у чужого голодного существа.</p></div></div>
+<div class="step"><span class="step-n">6</span><div class="step-b"><span style="font-weight: 600">Отказ от дополнительного</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Взятие <span class="chip chip-r"></span></span><span class="tag tag-extra tag-off"><span class="bx"></span>Пиратство — не используем</span></div><p class="p" style="font-size: 14.5px">«Пиратство» доступно, но вы его не применяете — например, бережёте на потом. Это разрешено.</p></div></div>
+<div class="step"><span class="step-n">7</span><div class="step-b"><span style="font-weight: 600">Избавиться от паразита</span><div class="strip"><span class="tag tag-main"><span class="bm"></span>Взятие <span class="chip chip-r"></span></span><span class="tag tag-extra"><span class="bx"></span>Отбрасывание → «Паразит» в сброс</span></div><p class="p" style="font-size: 14.5px">Сбросили «Паразита» «Отбрасыванием хвоста». Но лимит хвоста на эту фазу потрачен: если существо атакуют, хвост его уже не спасёт.</p></div></div>
+</div>
+</section>
+
+<section id="predators" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Раздел 6</span><h2 class="h2">Хищники: охота обязательна</h2></div>
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 12px">
+<div class="li"><span class="li-dot"></span><p class="p sm"><span class="tag tag-main" style="padding: 3px 10px; vertical-align: 1px"><span class="bm"></span>Атака</span> — основное действие. Каждый хищник атакует <b>один раз за фазу выживания</b>: очередь вернулась к вам — новой атаки у него нет.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Хищник может атаковать любое незащищённое существо — <b>в том числе ваше собственное</b> или другого хищника.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Съев добычу, хищник получает 2 синие фишки, а за существо со свойством «Большое» — 3. Добыча, её свойства и связанные парные свойства уходят в сброс.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm">Сытый хищник без незаполненного «Жирового запаса» атаковать не может.</p></div>
+<div class="li"><span class="li-dot"></span><p class="p sm"><b>Если еды в базе нет, хищник голоден и ещё не атаковал в эту фазу, есть допустимая цель и других основных действий нет — атаковать обязательно.</b> Даже если цель — ваше собственное существо.</p></div>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl">Ситуация А</span>
+<span class="h3">Чужих целей нет</span>
+<div class="board">
+<div class="brow"><span class="lbl">База</span><span class="muted" style="font-size: 14px">пусто</span></div>
+<div class="brow"><span class="lbl">Вы</span><span class="btoks"><span class="cr cr-hunt">Хщ</span><span class="cr cr-target">Сущ.</span></span></div>
+<div class="brow"><span class="lbl">Соперник</span><span class="btoks"><span class="cr cr-safe">Км</span></span></div>
+</div>
+<p class="p" style="font-size: 14.5px">Ваш хищник голоден. Существо соперника с «Камуфляжем» ему недоступно — у хищника нет «Острого зрения».</p>
+<div class="verdict"><span class="chip chip-r" style="margin-top: 3px"></span><span>Атака на собственное существо обязательна.</span></div>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl">Ситуация Б</span>
+<span class="h3">Своя добыча ядовита</span>
+<div class="board">
+<div class="brow"><span class="lbl">База</span><span class="muted" style="font-size: 14px">пусто</span></div>
+<div class="brow"><span class="lbl">Вы</span><span class="btoks"><span class="cr cr-hunt">Хщ</span><span class="cr cr-target">Яд</span></span></div>
+<div class="brow"><span class="lbl">Соперник</span><span class="btoks"><span class="cr cr-safe">Км</span></span></div>
+</div>
+<p class="p" style="font-size: 14.5px">Единственная цель — ваше ядовитое существо. Её нельзя исключить только потому, что атака навредит вам.</p>
+<div class="verdict"><span class="chip chip-r" style="margin-top: 3px"></span><span>Атаковать обязательно. Хищник наестся, но отравится и погибнет в конце фазы выживания.</span></div>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl">Ситуация В</span>
+<span class="h3">Целей нет вообще</span>
+<div class="board">
+<div class="brow"><span class="lbl">База</span><span class="muted" style="font-size: 14px">пусто</span></div>
+<div class="brow"><span class="lbl">Вы</span><span class="btoks"><span class="cr cr-hunt">Хщ</span></span></div>
+<div class="brow"><span class="lbl">Соперник</span><span class="btoks"><span class="cr cr-safe">Км</span><span class="cr cr-safe">Бл</span></span></div>
+</div>
+<p class="p" style="font-size: 14.5px">Все существа защищены от этого хищника: «Камуфляж» и «Большое».</p>
+<div class="verdict"><span class="chip chip-gone" style="margin-top: 3px"></span><span>Атаковать некого — действие не требуется. Голодный хищник погибнет при проверке вымирания.</span></div>
+</div>
+
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl">Ситуация Г</span>
+<span class="h3">В базе ещё есть еда</span>
+<div class="board">
+<div class="brow"><span class="lbl">База</span><span class="btoks"><span class="chip chip-r"></span><span class="chip chip-r"></span></span></div>
+<div class="brow"><span class="lbl">Вы</span><span class="btoks"><span class="cr cr-hunt">Хщ</span><span class="cr">Сущ.</span></span></div>
+<div class="brow"><span class="lbl">Соперник</span><span class="btoks"><span class="cr">Сущ.</span></span></div>
+</div>
+<div class="verdict"><span class="chip chip-r" style="margin-top: 3px"></span><span>Выбор за вами: Взятие или Атака — оба действия основные. Но одно из них сделать обязательно.</span></div>
+</div>
+</section>
+
+<section id="traits" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Раздел 7</span><h2 class="h2">Таблица свойств</h2></div>
+<p class="p sm">Нажмите на клетку — под ней откроется подробное описание: что делает свойство, какое это действие, когда работает, сколько раз, обязательно ли, ограничения и примеры. Цифра в углу — сколько дополнительной еды требует свойство.</p>
+<div class="card" style="padding: 4px 18px">
+<div class="step" style="border-top: 0"><span class="step-n">→</span><p class="p sm"><b>Без ограничений.</b> На существо можно сыграть сколько угодно свойств, но не два одинаковых — кроме парных и «Жирового запаса».</p></div>
+<div class="step"><span class="step-n">→</span><p class="p sm"><b>Порядок — ваш.</b> Несколько свойств срабатывают одновременно — владелец выбирает порядок. Например: сначала «Быстрое», потом «Отбрасывание хвоста».</p></div>
+<div class="step"><span class="step-n">→</span><div class="step-b"><p class="p sm"><b>Значки.</b> Использованную карту поверните на 90°.</p><div style="display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; font-size: 13px"><span style="display: flex; gap: 6px; align-items: center"><span class="bm"></span>основное</span><span style="display: flex; gap: 6px; align-items: center"><span class="bx"></span>дополнительное</span><span style="display: flex; gap: 6px; align-items: center"><span class="bd"></span>срабатывает само</span><span style="display: flex; gap: 6px; align-items: center"><span class="bs"></span>действует постоянно</span></div></div></div>
+</div>
+<div id="traitGrid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"></div>
+<div class="card" style="padding: 22px 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl" style="color: #C4B5FD">Парные свойства</span>
+<h3 class="h3" style="font-size: 20px">Одна карта — два существа</h3>
+<div class="li"><span class="li-dot" style="background: #C4B5FD"></span><p class="p sm">Одно существо может быть связано одинаковыми парными свойствами с разными существами, но на одну и ту же пару два одинаковых не сыграть.</p></div>
+<div class="li"><span class="li-dot" style="background: #C4B5FD"></span><p class="p sm">Если одно из существ уходит в сброс, парное свойство уходит вместе с ним.</p></div>
+<div class="li"><span class="li-dot" style="background: #C4B5FD"></span><p class="p sm">За один ход срабатывает не больше одной карты «Взаимодействие» и не больше одной карты «Сотрудничество». За всю фазу они могут сработать неоднократно.</p></div>
+<div class="li"><span class="li-dot" style="background: #C4B5FD"></span><p class="p sm">Порядок выбирает игрок. Например, при «Взаимодействии» и «Симбиозе» на одной паре: сначала фишка симбионту, а когда он накормлен — сразу ещё одна защищаемому существу.</p></div>
+<div class="inset" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+<span class="lbl" style="color: #C4B5FD">Симбиоз: кто кого защищает</span>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr); gap: 6px; align-items: start">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+<div class="mini-card" style="border-color: #C4B5FD; color: #C4B5FD">СУЩ.</div>
+<span style="font-weight: 600; font-size: 14px">Защищаемое</span>
+<span class="muted" style="font-size: 12px; line-height: 1.35">нельзя атаковать, пока жив симбионт</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; padding-top: 22px; color: #C4B5FD">
+<svg width="44" height="24" viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h36M31 4l8 8-8 8"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+<div class="mini-card" style="border-color: #C4B5FD; background: #C4B5FD; color: #1B1530">СУЩ.</div>
+<span style="font-weight: 600; font-size: 14px">Симбионт</span>
+<span class="muted" style="font-size: 12px; line-height: 1.35">на него указывает стрелка; должен наесться первым</span>
+</div>
+</div>
+<p class="p" style="font-size: 14.5px">Пока симбионт не сыт, защищаемое существо не получает обычную еду — но может растопить свой жир (Топление). Симбионт погиб — карта «Симбиоз» уходит в сброс, защита пропадает.</p>
+</div>
+</div>
+</section>
+
+<section id="score" class="wrap sec" style="padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="lbl">Раздел 8</span><h2 class="h2">Конец игры и очки</h2></div>
+<div class="card" style="padding: 20px 18px; display: flex; flex-direction: column; gap: 10px; border-color: rgba(198,244,50,0.5)">
+<span class="lbl" style="color: #C6F432">Последняя эпоха</span>
+<p class="p sm">Если <b>после раздачи карт колода опустела</b>, эта эпоха последняя. Её играют полностью — вместе с проверкой вымирания. Когда она заканчивается, игра окончена: считаем очки.</p>
+<p class="p muted" style="font-size: 14px">Число эпох заранее не ограничено. Гибель отдельных существ игру не заканчивает.</p>
+</div>
+<div class="inset" style="padding: 6px 16px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">Выжившее существо</span><b>2 очка</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">Свойство без цифры</span><b>1 очко</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(233,239,230,0.08); font-size: 15px"><span class="muted">Свойство <b style="color: #FF8A8D">+1</b> («Хищник», «Большое»)</span><b>2 очка</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 15px"><span class="muted">Свойство <b style="color: #FF8A8D">+2</b> («Паразит»)</span><b>3 очка</b></div>
+</div>
+<p class="p muted" style="font-size: 14px">Считаются только выжившие существа и их свойства.</p>
+<div class="card" style="padding: 4px 18px 18px">
+<div id="scoreRows"></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 16px">
+<button type="button" class="btn" id="resetScore">Сбросить</button>
+<div style="display: flex; align-items: baseline; gap: 10px"><span class="lbl">Итого</span><span class="num" id="scoreTotal" style="font-size: 48px" aria-live="polite">0</span></div>
+</div>
+</div>
+<div class="inset" style="padding: 18px; display: flex; flex-direction: column; gap: 6px">
+<span class="lbl">Ничья</span>
+<p class="p sm">При равенстве очков побеждает тот, у кого <b>больше карт в сбросе</b>.</p>
+</div>
+</section>
+
+<footer style="border-top: 1px solid rgba(233,239,230,0.08)">
+<div class="wrap" style="padding-top: 24px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 6px">
+<span class="muted" style="font-size: 13px">На основе правил v1.4.1 (июнь 2015), © Д. Кнорре, С. Мачин, 2010–2015, с корректировками</span>
+<span class="muted" style="font-size: 13px">Неофициальная визуализация правил</span>
+</div>
+</footer>
+
+</div>
+<script src="/app.js" defer></script>
+</body>
+</html>
